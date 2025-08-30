@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bash start.sh"
+    "dev": "export NVM_DIR=\"$HOME/.nvm\" && [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" && nvm install 20 && nvm use 20 && npm install && PORT=3000 npx mastra dev"
   },
   "keywords": [],
   "author": "",
