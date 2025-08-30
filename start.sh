@@ -6,11 +6,14 @@ echo "Starting development server..."
 NODE_VERSION=$(node -v | cut -d. -f1 | sed 's/v//')
 echo "Current Node.js version: v$NODE_VERSION"
 
-NEED_REINSTALL=false
-
 if [ "$NODE_VERSION" -lt 20 ]; then
     echo "Node.js version is below 20, upgrading to latest..."
-    NEED_REINSTALL=true
+    
+    # Temporarily store and clear npm prefix (safer approach)
+    ORIGINAL_PREFIX=$(npm config get prefix 2>/dev/null || echo "")
+    
+    # Clear prefix only for NVM installation
+    npm config delete prefix 2>/dev/null || true
     
     if ! command -v nvm &> /dev/null; then
         echo "Installing NVM..."
@@ -22,31 +25,22 @@ if [ "$NODE_VERSION" -lt 20 ]; then
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     fi
     
-    echo "Installing latest Node.js..."
+    # Install node with NVM
     nvm install node
     nvm use node
     echo "Node.js upgraded to: $(node -v)"
-fi
-
-# Always reinstall if Node was upgraded OR if node_modules doesn't exist
-if [ "$NEED_REINSTALL" = true ] || [ ! -d "node_modules" ]; then
-    echo "Installing/reinstalling npm dependencies..."
     
-    # Clean install to avoid conflicts
-    if [ -d "node_modules" ]; then
-        echo "Removing existing node_modules..."
-        rm -rf node_modules
-    fi
+    # Note: On ephemeral servers, no need to restore prefix since server restarts anyway
+    # But if you wanted to: npm config set prefix "$ORIGINAL_PREFIX" 2>/dev/null || true
     
-    if [ -f "package-lock.json" ]; then
-        echo "Removing package-lock.json to avoid conflicts..."
-        rm package-lock.json
-    fi
-    
+    # Reinstall dependencies
+    echo "Reinstalling dependencies after Node.js upgrade..."
     npm install
-    echo "Dependencies installed successfully"
 else
-    echo "Dependencies already installed, skipping..."
+    if [ ! -d "node_modules" ]; then
+        echo "Installing npm dependencies..."
+        npm install
+    fi
 fi
 
 echo "Starting development server on PORT=3000..."
