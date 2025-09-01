@@ -3,15 +3,24 @@ set -e
 
 REQUIRED_MAJOR=20
 
-# Load NVM if available
+# Ensure NVM is properly loaded
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Check if NVM is available, if not install it
 if ! command -v nvm &> /dev/null; then
   echo "Installing NVM..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  
+  # Verify NVM is working
+  if ! command -v nvm &> /dev/null; then
+    echo "NVM installation failed. Please install NVM manually."
+    exit 1
+  fi
 fi
 
 # Check node version
@@ -29,4 +38,6 @@ else
 fi
 
 echo "Starting Mastra dev..."
-PORT=3000 npx mastra dev
+export PORT=3000
+npx mastra dev
+
