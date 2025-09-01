@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Unset npm_config_prefix to avoid NVM issues
+unset npm_config_prefix
+
 REQUIRED_MAJOR=20
 
 # Ensure NVM is properly loaded
@@ -36,8 +39,7 @@ if [ "$CURRENT_MAJOR" -lt "$REQUIRED_MAJOR" ]; then
 else
   echo "Node.js already v$REQUIRED_MAJOR+, skipping install"
 fi
-
+rm -rf /template/.mastra/output/playground/assets
 echo "Starting Mastra dev..."
 export PORT=3000
 npx mastra dev
-
