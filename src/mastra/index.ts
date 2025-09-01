@@ -10,4 +10,12 @@ export const mastra = new Mastra({
     name: 'Mastra',
     level: 'info',
   }),
+    server: {
+    cors: {
+      origin: ["http://localhost:3000"],  // allow the exact frontend origin
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+      credentials: true,                  // enable cookies/auth
+    },
+  },
 });
