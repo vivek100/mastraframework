@@ -20,6 +20,9 @@ interface WeatherResponse {
   };
 }
 
+// @node {"id":"tool.weatherTool","type":"tool","name":"Weather Tool"}
+// @prop {"target":"node","id":"tool.weatherTool","key":"inputSchema","ref":{"expr":"weatherTool.inputSchema","file":"mvp0.02/mastraframework/src/mastra/tools/index.ts"}}
+// @prop {"target":"node","id":"tool.weatherTool","key":"outputSchema","ref":{"expr":"weatherTool.outputSchema","file":"mvp0.02/mastraframework/src/mastra/tools/index.ts"}}
 export const weatherTool = createTool({
   id: 'get-weather',
   description: 'Get current weather for a location',

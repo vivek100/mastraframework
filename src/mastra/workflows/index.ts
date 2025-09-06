@@ -173,6 +173,8 @@ const planActivities = createStep({
   },
 });
 
+// @node {"id":"workflow.weatherWorkflow","type":"workflow","name":"Weather Workflow"}
+// @prop {"target":"node","id":"workflow.weatherWorkflow","key":"definition","ref":{"expr":"weatherWorkflow.definition","file":"mvp0.02/mastraframework/src/mastra/workflows/index.ts"}}
 const weatherWorkflow = createWorkflow({
   id: 'weather-workflow',
   inputSchema: z.object({
