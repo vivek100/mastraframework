@@ -4,6 +4,4 @@ dist
 .mastra
 .env.development
 .env
-*.db
-*.db-*
 package-lock.json
