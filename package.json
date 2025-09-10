@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "bash check-node.sh",
-    "dev": "bash -c 'source ~/.bashrc && bash start.sh'"
+    "dev": "mastra dev"
   },
   "keywords": [],
   "author": "",
