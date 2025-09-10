@@ -7,5 +7,3 @@ dist
 *.db
 *.db-*
 package-lock.json
-memory.db
-memory.db-*
