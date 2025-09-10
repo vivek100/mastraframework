@@ -15,6 +15,10 @@ export const mastra = new Mastra({
       url: "file:../../memory.db",
     }),
     server: {
+      server: {
+        port: 3000,        // <-- match Freestyle's default health-check
+        host: "0.0.0.0",   // <-- bind broadly so the VM and proxy can reach it
+      },
     cors: {
       origin: ["http://localhost:3000"],  // allow the exact frontend origin
       allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
