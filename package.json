@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bash -c 'source ~/.bashrc && bash start.sh'"
+    "dev": "bash -c 'source ~/.bashrc && bash start.sh'",
+    "install": "bash -c 'source ~/.bashrc && bash start.sh'"
   },
   "keywords": [],
   "author": "",
@@ -14,9 +15,9 @@
   "type": "module",
   "dependencies": {
     "@ai-sdk/openai": "^1.3.24",
-    "@mastra/core": "^0.16.2",
+    "@mastra/core": "latest",
     "@mastra/libsql": "^0.14.0",
-    "@mastra/loggers": "^0.16.2",
+    "@mastra/loggers": "latest",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "ts-morph": "^21.0.1",
